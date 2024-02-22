@@ -5,11 +5,27 @@ import 'package:fundstartup_app/theme/style.dart';
 Widget RoundedButton(String text) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-    child: Text(text, style: TextThemeApp.regularText.copyWith(color: ColorsApp.whiteColor),),
+    child: Text(
+      text,
+      style: TextThemeApp.regularText.copyWith(color: ColorsApp.whiteColor),
+    ),
     decoration: BoxDecoration(
         border: Border.all(
           color: ColorsApp.whiteColor,
         ),
+        borderRadius: BorderRadius.all(Radius.circular(20))),
+  );
+}
+
+Widget RoundedButtonColors(String text, final Color? color) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+    child: Text(
+      text,
+      style: TextThemeApp.regularText.copyWith(color: ColorsApp.whiteColor),
+    ),
+    decoration: BoxDecoration(
+        color: color ?? ColorsApp.greenColor,
         borderRadius: BorderRadius.all(Radius.circular(20))),
   );
 }

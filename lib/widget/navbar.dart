@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fundstartup_app/helper/reponseive_layout.dart';
 import 'package:fundstartup_app/theme/style.dart';
 import 'package:fundstartup_app/view/homepage/Components.dart';
 
@@ -19,7 +20,7 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(50, 20, 50, 20),
+      margin: EdgeInsets.fromLTRB(50, 20, 50, 16),
       width: size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,6 +45,7 @@ class NavBar extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(left: 20),
+                width: ResponsiveLayout.isMediumScreen(context) ? size.width * 0.5 : size.width * 0.6,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
