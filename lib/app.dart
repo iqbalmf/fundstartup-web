@@ -14,11 +14,7 @@ class FundApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Fundraising App",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(
-              iconTheme: IconThemeData(color: Colors.amber)
-          )
-      ),
+      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
       home: HomePage(),
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fundstartup_app/view/homepage/Components.dart';
+import 'package:fundstartup_app/helper/reponseive_layout.dart';
+import 'package:fundstartup_app/widget/navbar.dart';
+
+import '../../theme/colors.dart';
 
 /**
  * Created by IqbalMF on 2024.
@@ -11,45 +14,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          padding: EdgeInsets.all(50), color: Colors.white, child: appbar()),
-    );
+    var _screenSize = MediaQuery.of(context).size;
+    return Container(
+        child: Scaffold(
+          backgroundColor: ColorsApp.primaryColor,
+          appBar: ResponsiveLayout.isSmallScreen(context) ? AppBar(
+            backgroundColor: ColorsApp.primaryColor,
+          ) : PreferredSize(preferredSize: Size(_screenSize.width, 70), child: NavBar(size: _screenSize,)),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [HomeUI(), ListCampaign(), Testimoni(), FooterUI() ],
+            ),
+          ),
+        ));
   }
 
-  Widget appbar() {
+  Widget HomeUI(){
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              ClipOval(
-                child: Container(
-                  height: 50, width: 50, color: Colors.greenAccent,
-                  child: Center(child: Text("FR")),
-                ),
-              ),
-              SizedBox(width: 15),
-              Text("Home"),
-              SizedBox(width: 10),
-              Text("Project"),
-              SizedBox(width: 10),
-              Text("Features"),
-              SizedBox(width: 10),
-              Text("Success Stories"),
-            ],
-          ),
-          Row(
-            children: [
-              RoundedButton("Daftar"),
-              SizedBox(width: 12),
-              RoundedButton("Akun Saya"),
-            ],
-          )
-        ],
-      ),
+      height: 500,
+      color: ColorsApp.primaryColor,
+    );
+  }
+  Widget ListCampaign(){
+    return Container(
+      height: 500,
+      color: Colors.amber,
+    );
+  }
+  Widget Testimoni(){
+    return Container(
+      height: 500,
+      color: Colors.orange,
+    );
+  }
+  Widget FooterUI(){
+    return Container(
+      height: 500,
+      color: Colors.black,
     );
   }
 }
