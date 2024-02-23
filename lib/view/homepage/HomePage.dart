@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fundstartup_app/domain/campaign_entity.dart';
 import 'package:fundstartup_app/helper/constants.dart';
 import 'package:fundstartup_app/helper/reponseive_layout.dart';
 import 'package:fundstartup_app/theme/style.dart';
 import 'package:fundstartup_app/view/homepage/Components.dart';
+import 'package:fundstartup_app/view/homepage/item_campaign.dart';
 import 'package:fundstartup_app/widget/navbar.dart';
 
 import '../../theme/colors.dart';
@@ -35,7 +37,7 @@ class HomePage extends StatelessWidget {
           children: [
             HomeUI(_screenSize),
             Illustration(_screenSize),
-            ListCampaign(),
+            ListCampaign(context, _screenSize),
             Testimoni(),
             FooterUI()
           ],
@@ -106,10 +108,15 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 50,),
+          SizedBox(
+            height: 50,
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 80),
-            child: Text("Hanya butuh 3 langkah untuk\nmenjalankan ide cemerlang Anda!", style: TextThemeApp.regularText.copyWith(fontSize: 20),),
+            child: Text(
+              "Only 3 steps to execute\nyour bright ideas",
+              style: TextThemeApp.regularText.copyWith(fontSize: 20),
+            ),
           ),
           SizedBox(
             height: 10,
@@ -128,10 +135,56 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget ListCampaign() {
+  Widget ListCampaign(BuildContext context, Size size) {
     return Container(
-      height: 500,
       color: ColorsApp.whiteColor,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: defaultMargin + 40, vertical: defaultMargin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "New projects you can\ntaken care of",
+                  style: TextThemeApp.regularText
+                      .copyWith(fontWeight: semiBold, fontSize: 16),
+                ),
+                Text(
+                  "View All",
+                  style: TextThemeApp.regularText.copyWith(fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin + 40),
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: ResponsiveLayout.isSmallScreen(context)
+                      ? 1
+                      : ResponsiveLayout.isMediumScreen(context)
+                          ? 2
+                          : 3,
+              crossAxisSpacing: 20, mainAxisSpacing: 20,
+                  childAspectRatio: 200/220),
+              itemBuilder: (context, index) {
+                return ItemCampaign(
+                  onTap: () {},
+                  campaignData: CampaignEntity(),
+                );
+              },
+              itemCount: 6,
+            ),
+          )
+        ],
+      ),
     );
   }
 
