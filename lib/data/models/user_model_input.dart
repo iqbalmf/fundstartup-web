@@ -4,5 +4,14 @@
  */
 
 class UserModelInput{
-  UserModelInput(String email, String password);
+  String email;
+  String password;
+  UserModelInput(this.email, this.password);
+
+  Map<String, dynamic> toJson(){
+    return {
+      'email': email,
+      'password': password
+    };
+  }
 }

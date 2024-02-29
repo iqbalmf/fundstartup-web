@@ -7,12 +7,12 @@ import 'package:fundstartup_app/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel(
-      {required super.idUser,
-      required super.name,
-      required super.occupation,
-      required super.email,
-      required super.token,
-      required super.avatarImage});
+      { super.idUser,
+       super.name,
+       super.occupation,
+       super.email,
+       super.token,
+       super.avatarImage});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
