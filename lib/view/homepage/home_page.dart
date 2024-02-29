@@ -4,7 +4,7 @@ import 'package:fundstartup_app/domain/campaign_entity.dart';
 import 'package:fundstartup_app/helper/constants.dart';
 import 'package:fundstartup_app/helper/reponseive_layout.dart';
 import 'package:fundstartup_app/theme/style.dart';
-import 'package:fundstartup_app/view/homepage/Components.dart';
+import 'package:fundstartup_app/view/homepage/components.dart';
 import 'package:fundstartup_app/view/homepage/item_campaign.dart';
 import 'package:fundstartup_app/widget/navbar.dart';
 

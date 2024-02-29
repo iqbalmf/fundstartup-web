@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "message": "Login Successfully",
+    "code": 200,
+    "status": "success"
+  },
+  "data": {
+    "id": 20,
+    "name": "Iqbal Muhammad 2",
+    "occupation": "Karyawan Swasta",
+    "email": "iqbalmf68@gmail.com",
+    "token": "xxxTokenxxx",
+    "image_url": "avatar_images/20-FWaB5j-UEAA-_yN.jpeg"
+  }
+}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fundstartup_app/view/homepage/HomePage.dart';
+import 'package:fundstartup_app/view/homepage/home_page.dart';
 import 'package:get/get.dart';
 
 /**
