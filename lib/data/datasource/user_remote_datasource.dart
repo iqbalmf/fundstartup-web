@@ -17,6 +17,8 @@ import '../models/user_model.dart';
 abstract class UserRemoteDataSource {
   Future<UserModel> getUserLogin(UserModelInput input);
   Future<UserModel> fetchUser();
+  Future<UserModel> createNewUser(NewUserModelInput input);
+  Future<bool> checkEmailAvaibility(String email);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -41,5 +43,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<UserModel> fetchUser() async {
     final response = await networkClient.get(Endpoints.fetchUser);
     return UserModel.fromJson(jsonDecode(response.data));
+  }
+
+  @override
+  Future<bool> checkEmailAvaibility(String email) {
+    // TODO: implement checkEmailAvaibility
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserModel> createNewUser(NewUserModelInput input) {
+    // TODO: implement createNewUser
+    throw UnimplementedError();
   }
 }

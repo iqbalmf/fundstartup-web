@@ -49,4 +49,15 @@ class UserRepositoryImpl implements UserRepository {
       return Left(ConnectionFailure("Failed to connect to the network"));
     }
   }
+  @override
+  Future<Either<Failure, UserEntity>> createNewUser(NewUserModelInput input) {
+    // TODO: implement createNewUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkEmailAvailbility(String email) {
+    // TODO: implement checkEmailAvailbility
+    throw UnimplementedError();
+  }
 }

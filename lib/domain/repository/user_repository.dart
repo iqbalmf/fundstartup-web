@@ -12,4 +12,6 @@ import '../entities/user_entity.dart';
 abstract class UserRepository {
   Future<Either<Failure, UserEntity>> getUserLogin(UserModelInput input);
   Future<Either<Failure, UserEntity>> fetchUserData();
+  Future<Either<Failure, UserEntity>> createNewUser(NewUserModelInput input);
+  Future<Either<Failure, bool>> checkEmailAvailbility(String email);
 }
