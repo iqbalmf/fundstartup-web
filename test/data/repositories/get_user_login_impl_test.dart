@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fundstartup_app/data/models/user_model.dart';
-import 'package:fundstartup_app/data/models/user_model_input.dart';
 import 'package:fundstartup_app/data/repositories/user_repository_impl.dart';
 import 'package:fundstartup_app/domain/entities/user_entity.dart';
 import 'package:fundstartup_app/utils/error/exception.dart';
@@ -30,19 +29,16 @@ void main() {
     mockUserModelInput = MockUserModelInput();
   });
 
-
   void runTestOnline(Function body) {
     group('device is online', () {
-      setUp(() =>
-          when(networkInfo.isConnected).thenAnswer((_) async => true));
+      setUp(() => when(networkInfo.isConnected).thenAnswer((_) async => true));
       body();
     });
   }
 
   void runTestOffline(Function body) {
     group('device is offline', () {
-      setUp(() =>
-          when(networkInfo.isConnected).thenAnswer((_) async => false));
+      setUp(() => when(networkInfo.isConnected).thenAnswer((_) async => false));
       body();
     });
   }
@@ -56,7 +52,8 @@ void main() {
       occupation: "Karyawan",
       email: "test@test.com",
       token: "xxx",
-      avatarImage: "avatar_images/x",);
+      avatarImage: "avatar_images/x",
+    );
 
     final testUserEntity = UserEntity(
       idUser: 1,
@@ -64,41 +61,52 @@ void main() {
       occupation: "Karyawan",
       email: "test@test.com",
       token: "xxx",
-      avatarImage: "avatar_images/x",);
+      avatarImage: "avatar_images/x",
+    );
 
-    runTestOnline((){
-      test("should return user data when a call to data source is successfull", () async {
-        when(userRemoteDataSource.getUserLogin(any)).thenAnswer((_) async => testUserModel);
+    runTestOnline(() {
+      test("should return user data when a call to data source is successfull",
+          () async {
+        when(userRemoteDataSource.getUserLogin(any))
+            .thenAnswer((_) async => testUserModel);
 
-        final result = await userRepositoryImpl.getUserLogin(mockUserModelInput);
+        final result =
+            await userRepositoryImpl.getUserLogin(mockUserModelInput);
 
         verify(userRemoteDataSource.getUserLogin(mockUserModelInput));
         expect(result, equals(Right(testUserEntity)));
       });
-      
-      test("should return server failure when a call to data source is unsuccessfull", () async {
-        when(userRemoteDataSource.getUserLogin(any)).thenThrow(ServerException());
 
-        final result = await userRepositoryImpl.getUserLogin(mockUserModelInput);
+      test(
+          "should return server failure when a call to data source is unsuccessfull",
+          () async {
+        when(userRemoteDataSource.getUserLogin(any))
+            .thenThrow(ServerException());
 
-        verify(userRemoteDataSource.getUserLogin(mockUserModelInput));
+        final result =
+            await userRepositoryImpl.getUserLogin(mockUserModelInput);
+
+        verify(userRemoteDataSource.getUserLogin(any));
         expect(result, equals(Left(ServerFailure("Internal server error"))));
       });
-      
-      test("should return connection failure when app has no internet connection", () async {
-        when(userRemoteDataSource.getUserLogin(any)).thenThrow(SocketException(""));
 
-        final result = await userRepositoryImpl.getUserLogin(mockUserModelInput);
+      test(
+          "should return connection failure when app has no internet connection",
+          () async {
+        when(userRemoteDataSource.getUserLogin(any))
+            .thenThrow(SocketException(""));
+
+        final result =
+            await userRepositoryImpl.getUserLogin(mockUserModelInput);
 
         verify(userRemoteDataSource.getUserLogin(mockUserModelInput));
-        expect(result, equals(Left(ConnectionFailure("Failed to connect to the network"))));
+        expect(
+            result,
+            equals(
+                Left(ConnectionFailure("Failed to connect to the network"))));
       });
     });
 
-    runTestOffline((){
-
-    });
+    runTestOffline(() {});
   });
-
-
 }

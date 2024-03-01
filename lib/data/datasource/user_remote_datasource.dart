@@ -40,6 +40,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<UserModel> fetchUser() async {
     final response = await networkClient.get(Endpoints.fetchUser);
-    return UserModel.fromJson(response.data);
+    return UserModel.fromJson(jsonDecode(response.data));
   }
 }

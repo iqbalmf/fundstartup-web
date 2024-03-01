@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fundstartup_app/data/datasource/user_remote_datasource.dart';
-import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/data/models/user_model.dart';
 import 'package:fundstartup_app/data/models/user_model_input.dart';
-import 'package:fundstartup_app/utils/api_helper.dart';
+import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/utils/network/config/endpoints.dart';
-import 'package:fundstartup_app/utils/network/interceptor/network_client.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper/json_reader.dart';
@@ -85,9 +83,6 @@ void main() {
   });
 
   group("get fetch user data", () {
-    const tEmail = "test@test.com";
-    const tPassword = "password";
-    final tUserInput = UserModelInput(tEmail, tPassword);
     final tUserModel = UserModel.fromJson(json.decode(jsonReader('user.json')));
     final httpResponse = Future.value(Response(
         data: jsonReader('user.json'),

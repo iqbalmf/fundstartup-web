@@ -40,7 +40,13 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, UserEntity>> fetchUserData() async{
-    // TODO: implement fetchUserData
-    throw UnimplementedError();
+    try{
+      final response = await remoteDataSource.fetchUser();
+      return Right(response.toEntity());
+    } on ServerException {
+      return Left(ServerFailure("Internal server error"));
+    } on SocketException {
+      return Left(ConnectionFailure("Failed to connect to the network"));
+    }
   }
 }
