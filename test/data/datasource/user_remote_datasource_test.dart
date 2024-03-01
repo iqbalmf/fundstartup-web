@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fundstartup_app/data/datasource/user_datasource.dart';
+import 'package:fundstartup_app/data/datasource/user_remote_datasource.dart';
 import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/data/models/user_model.dart';
 import 'package:fundstartup_app/data/models/user_model_input.dart';
 import 'package:fundstartup_app/utils/api_helper.dart';
+import 'package:fundstartup_app/utils/network/config/endpoints.dart';
+import 'package:fundstartup_app/utils/network/interceptor/network_client.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper/json_reader.dart';
@@ -23,13 +25,12 @@ import '../../helper/test_helper.mocks.dart';
 void main() {
   late MockDioClient mockDioClient;
   late UserRemoteDataSourceImpl dataSourceImpl;
+  late MockNetworkClient mockNetworkClient;
 
   setUp(() {
     mockDioClient = MockDioClient();
-    dataSourceImpl = UserRemoteDataSourceImpl(dio: mockDioClient);
-    // dioAdapterMock = DioAdapterMock();
-    // tDio.httpClientAdapter = dioAdapterMock;
-    // tApi = ApiHelper(tDio);
+    mockNetworkClient = MockNetworkClient();
+    dataSourceImpl = UserRemoteDataSourceImpl(dio: mockDioClient, networkClient: mockNetworkClient);
   });
 
   group('get user login', () {
@@ -81,5 +82,31 @@ void main() {
       final call = dataSourceImpl.getUserLogin;
       expect(() => call(tUserInput), throwsA(isA<ServerException>()));
     });
+  });
+
+  group("get fetch user data", () {
+    const tEmail = "test@test.com";
+    const tPassword = "password";
+    final tUserInput = UserModelInput(tEmail, tPassword);
+    final tUserModel = UserModel.fromJson(json.decode(jsonReader('user.json')));
+    final httpResponse = Future.value(Response(
+        data: jsonReader('user.json'),
+        requestOptions: RequestOptions(
+            headers: {Headers.contentTypeHeader: Headers.jsonContentType}),
+        statusCode: HttpStatus.ok));
+
+    test(
+        "should perform a GET request on URL with empty param and with application/json header",
+            () async {
+          when(
+            mockNetworkClient.get(
+              Endpoints.fetchUser,
+            ),
+          ).thenAnswer((_) async => httpResponse);
+          dataSourceImpl.fetchUser();
+          verify(
+            mockNetworkClient.get(Endpoints.fetchUser),
+          );
+        });
   });
 }

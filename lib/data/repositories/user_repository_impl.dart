@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:fundstartup_app/data/datasource/user_datasource.dart';
+import 'package:fundstartup_app/data/datasource/user_remote_datasource.dart';
 import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/data/models/user_model_input.dart';
 import 'package:fundstartup_app/domain/entities/user_entity.dart';
@@ -23,13 +23,7 @@ class UserRepositoryImpl implements UserRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, UserEntity>> getUserLogin(
-      UserModelInput input) async {
-    return await _getUserLogin(input);
-  }
-
-  Future<Either<Failure, UserEntity>> _getUserLogin(
-      UserModelInput input) async {
+  Future<Either<Failure, UserEntity>> getUserLogin(UserModelInput input) async {
     if (await networkInfo.isConnected ?? false) {
       try {
         final result = await remoteDataSource.getUserLogin(input);
@@ -42,5 +36,11 @@ class UserRepositoryImpl implements UserRepository {
     } else {
       return Left(ConnectionFailure("Failed to connect to the network"));
     }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> fetchUserData() async{
+    // TODO: implement fetchUserData
+    throw UnimplementedError();
   }
 }
