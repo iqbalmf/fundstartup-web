@@ -7,13 +7,15 @@ import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:dio/dio.dart' as _i4;
-import 'package:fundstartup_app/data/datasource/user_datasource.dart' as _i9;
-import 'package:fundstartup_app/data/failure.dart' as _i7;
+import 'package:fundstartup_app/data/datasource/user_datasource.dart' as _i10;
 import 'package:fundstartup_app/data/models/user_model.dart' as _i3;
-import 'package:fundstartup_app/data/models/user_model_input.dart' as _i10;
+import 'package:fundstartup_app/data/models/user_model_input.dart' as _i9;
 import 'package:fundstartup_app/domain/entities/user_entity.dart' as _i8;
 import 'package:fundstartup_app/domain/repository/user_repository.dart' as _i5;
+import 'package:fundstartup_app/utils/error/failure.dart' as _i7;
+import 'package:fundstartup_app/utils/network_info.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -109,26 +111,18 @@ class MockUserRepository extends _i1.Mock implements _i5.UserRepository {
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>> getUserLogin(
-    String? email,
-    String? password,
-  ) =>
+          _i9.UserModelInput? input) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserLogin,
-          [
-            email,
-            password,
-          ],
+          [input],
         ),
         returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>>.value(
             _FakeEither_0<_i7.Failure, _i8.UserEntity>(
           this,
           Invocation.method(
             #getUserLogin,
-            [
-              email,
-              password,
-            ],
+            [input],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>>);
@@ -138,13 +132,13 @@ class MockUserRepository extends _i1.Mock implements _i5.UserRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDataSource extends _i1.Mock
-    implements _i9.UserRemoteDataSource {
+    implements _i10.UserRemoteDataSource {
   MockUserRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.UserModel> getUserLogin(_i10.UserModelInput? input) =>
+  _i6.Future<_i3.UserModel> getUserLogin(_i9.UserModelInput? input) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserLogin,
@@ -158,6 +152,69 @@ class MockUserRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i3.UserModel>);
+}
+
+/// A class which mocks [NetworkInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkInfo extends _i1.Mock implements _i11.NetworkInfo {
+  MockNetworkInfo() {
+    _i1.throwOnMissingStub(this);
+  }
+}
+
+/// A class which mocks [UserModelInput].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserModelInput extends _i1.Mock implements _i9.UserModelInput {
+  MockUserModelInput() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get email => (super.noSuchMethod(
+        Invocation.getter(#email),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.getter(#email),
+        ),
+      ) as String);
+
+  @override
+  set email(String? _email) => super.noSuchMethod(
+        Invocation.setter(
+          #email,
+          _email,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  String get password => (super.noSuchMethod(
+        Invocation.getter(#password),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.getter(#password),
+        ),
+      ) as String);
+
+  @override
+  set password(String? _password) => super.noSuchMethod(
+        Invocation.setter(
+          #password,
+          _password,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  Map<String, dynamic> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }
 
 /// A class which mocks [Dio].

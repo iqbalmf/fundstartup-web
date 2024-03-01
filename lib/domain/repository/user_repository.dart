@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:fundstartup_app/data/models/user_model_input.dart';
 
-import '../../data/failure.dart';
+import '../../utils/error/failure.dart';
 import '../entities/user_entity.dart';
 
 /**
@@ -9,5 +10,5 @@ import '../entities/user_entity.dart';
  */
 
 abstract class UserRepository {
-  Future<Either<Failure, UserEntity>> getUserLogin(String email, String password);
+  Future<Either<Failure, UserEntity>> getUserLogin(UserModelInput input);
 }

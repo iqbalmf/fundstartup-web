@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fundstartup_app/data/models/user_model.dart';
 import 'package:fundstartup_app/domain/entities/user_entity.dart';
 
-import '../helper/json_reader.dart';
+import '../../helper/json_reader.dart';
 
 /**
  * Created by IqbalMF on 2024.

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:fundstartup_app/data/exception.dart';
+import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/data/models/user_model_input.dart';
 
 import '../models/user_model.dart';

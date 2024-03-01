@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fundstartup_app/data/models/user_model_input.dart';
 import 'package:fundstartup_app/domain/entities/user_entity.dart';
 import 'package:fundstartup_app/domain/usecase/get_user_login_usecase.dart';
 import 'package:mockito/mockito.dart';
@@ -31,12 +32,12 @@ void main() {
 
   test('should get user from the repository', () async {
     //arrange
-    when(mockUserRepository.getUserLogin(tUserEmail, tUserPass)).thenAnswer((_) async => Right(testUserEntity));
+    when(mockUserRepository.getUserLogin(any)).thenAnswer((_) async => Right(testUserEntity));
     //act
-    final result = await getUserLoginUseCase.execute(tUserEmail, tUserPass);
+    final result = await getUserLoginUseCase.execute(UserModelInput(tUserEmail, tUserPass));
     //assert
     expect(result, Right(testUserEntity));
-    verify(mockUserRepository.getUserLogin(tUserEmail, tUserPass));
+    verify(mockUserRepository.getUserLogin(any));
     verifyNoMoreInteractions(mockUserRepository);
   });
 }
