@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:fundstartup_app/utils/error/exception.dart';
 import 'package:fundstartup_app/data/models/user_model_input.dart';
 import 'package:fundstartup_app/utils/network/config/endpoints.dart';
-import 'package:fundstartup_app/utils/network/interceptor/network_client.dart';
+import 'package:fundstartup_app/utils/network/network_client.dart';
 
 import '../models/user_model.dart';
 
@@ -19,6 +19,7 @@ abstract class UserRemoteDataSource {
   Future<UserModel> fetchUser();
   Future<UserModel> createNewUser(NewUserModelInput input);
   Future<bool> checkEmailAvaibility(String email);
+  Future<bool> uploadUserAvatar(File file);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -46,14 +47,20 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<bool> checkEmailAvaibility(String email) {
-    // TODO: implement checkEmailAvaibility
-    throw UnimplementedError();
+  Future<bool> checkEmailAvaibility(String email) async {
+    final response = await networkClient.post(Endpoints.emailChecker);
+    return response.data["is_available"];
   }
 
   @override
   Future<UserModel> createNewUser(NewUserModelInput input) {
     // TODO: implement createNewUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> uploadUserAvatar(File file) {
+    // TODO: implement uploadUserAvatar
     throw UnimplementedError();
   }
 }

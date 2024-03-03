@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../config/endpoints.dart';
-import 'network_interceptor.dart';
+import 'config/endpoints.dart';
+import 'interceptor/network_interceptor.dart';
 
 /**
  * Created by IqbalMF on 2024.

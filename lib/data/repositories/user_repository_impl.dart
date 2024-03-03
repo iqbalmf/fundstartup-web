@@ -50,14 +50,32 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
   @override
-  Future<Either<Failure, UserEntity>> createNewUser(NewUserModelInput input) {
-    // TODO: implement createNewUser
-    throw UnimplementedError();
+  Future<Either<Failure, UserEntity>> createNewUser(NewUserModelInput input) async {
+    try {
+      final response = await remoteDataSource.createNewUser(input);
+      return Right(response.toEntity());
+    } on ServerException {
+      return Left(ServerFailure("Internal server error"));
+    } on SocketException {
+      return Left(ConnectionFailure("Failed to connect to the network"));
+    }
   }
 
   @override
-  Future<Either<Failure, bool>> checkEmailAvailbility(String email) {
-    // TODO: implement checkEmailAvailbility
+  Future<Either<Failure, bool>> checkEmailAvailbility(String email) async {
+    try {
+      final response = await remoteDataSource.checkEmailAvaibility(email);
+      return Right(response);
+    } on ServerException {
+      return Left(ServerFailure("Internal server error"));
+    } on SocketException {
+      return Left(ConnectionFailure("Failed to connect to the network"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> uploadedAvatar(File fileImage) {
+    // TODO: implement uploadedAvatar
     throw UnimplementedError();
   }
 }

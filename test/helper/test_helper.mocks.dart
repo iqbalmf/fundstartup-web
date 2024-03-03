@@ -14,7 +14,7 @@ import 'package:fundstartup_app/data/models/user_model_input.dart' as _i9;
 import 'package:fundstartup_app/domain/entities/user_entity.dart' as _i8;
 import 'package:fundstartup_app/domain/repository/user_repository.dart' as _i5;
 import 'package:fundstartup_app/utils/error/failure.dart' as _i7;
-import 'package:fundstartup_app/utils/network/interceptor/network_client.dart'
+import 'package:fundstartup_app/utils/network/network_client.dart'
     as _i13;
 import 'package:fundstartup_app/utils/network_info.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
@@ -146,6 +146,42 @@ class MockUserRepository extends _i1.Mock implements _i5.UserRepository {
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>> createNewUser(
+          _i9.NewUserModelInput? input) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewUser,
+          [input],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>>.value(
+            _FakeEither_0<_i7.Failure, _i8.UserEntity>(
+          this,
+          Invocation.method(
+            #createNewUser,
+            [input],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserEntity>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, bool>> checkEmailAvailbility(
+          String? email) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #checkEmailAvailbility,
+          [email],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
+          this,
+          Invocation.method(
+            #checkEmailAvailbility,
+            [email],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, bool>>);
 }
 
 /// A class which mocks [UserRemoteDataSource].
@@ -187,6 +223,31 @@ class MockUserRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i3.UserModel>);
+
+  @override
+  _i6.Future<_i3.UserModel> createNewUser(_i9.NewUserModelInput? input) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewUser,
+          [input],
+        ),
+        returnValue: _i6.Future<_i3.UserModel>.value(_FakeUserModel_1(
+          this,
+          Invocation.method(
+            #createNewUser,
+            [input],
+          ),
+        )),
+      ) as _i6.Future<_i3.UserModel>);
+
+  @override
+  _i6.Future<bool> checkEmailAvaibility(String? email) => (super.noSuchMethod(
+        Invocation.method(
+          #checkEmailAvaibility,
+          [email],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 }
 
 /// A class which mocks [NetworkInfo].
