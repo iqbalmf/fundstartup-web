@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fundstartup_app/domain/campaign_entity.dart';
 import 'package:fundstartup_app/helper/constants.dart';
 import 'package:fundstartup_app/helper/reponseive_layout.dart';
@@ -38,8 +39,8 @@ class HomePage extends StatelessWidget {
             HomeUI(_screenSize),
             Illustration(_screenSize),
             ListCampaign(context, _screenSize),
-            Testimoni(),
-            FooterUI()
+            Testimoni(context, _screenSize),
+            FooterUI(context)
           ],
         ),
       ),
@@ -153,7 +154,7 @@ class HomePage extends StatelessWidget {
                 ),
                 Text(
                   "View All",
-                  style: TextThemeApp.regularText.copyWith(fontSize: 14),
+                  style: TextThemeApp.headline.copyWith(fontSize: 14),
                 ),
               ],
             ),
@@ -172,8 +173,9 @@ class HomePage extends StatelessWidget {
                       : ResponsiveLayout.isMediumScreen(context)
                           ? 2
                           : 3,
-              crossAxisSpacing: 20, mainAxisSpacing: 20,
-                  childAspectRatio: 200/220),
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 200 / 220),
               itemBuilder: (context, index) {
                 return ItemCampaign(
                   onTap: () {},
@@ -188,17 +190,208 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget Testimoni() {
+  Widget Testimoni(BuildContext context, Size size) {
     return Container(
       height: 500,
+      width: size.width,
       color: ColorsApp.whiteColor,
+      padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin + 40, vertical: defaultMargin),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "See What Our Happy "
+              "\nClients Say",
+              style: TextThemeApp.headline.copyWith(fontSize: 20),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Center(
+            child: Text(
+              "\"Funding at Bucker is very easy and comfortable.\n"
+              "Just need to find an idea, click and already funding.\"",
+              style: TextThemeApp.subtitleText.copyWith(
+                  fontWeight: light, fontSize: 30, color: ColorsApp.blackColor),
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  Widget FooterUI() {
+  Widget FooterUI(BuildContext context) {
     return Container(
       height: 500,
-      color: ColorsApp.whiteColor,
+      color: ColorsApp.primaryColor,
+      padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin + 40, vertical: defaultMargin),
+      child: Column(
+        children: [
+          Center(
+            child: Text(
+              "Easy way to funding\nbest idea and innovation",
+              style: TextThemeApp.headline
+                  .copyWith(color: ColorsApp.whiteColor, fontSize: 40),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: defaultMargin * 2,
+          ),
+          RoundedButtonColors("Getting Start", ColorsApp.secondaryColor),
+          SizedBox(
+            height: defaultMargin * 3,
+          ),
+          ResponsiveLayout.isLargeScreen(context)
+              ? Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 100,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: defaultMargin),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: ColorsApp.greenColor,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "FR",
+                                          style: TextThemeApp.headline
+                                              .copyWith(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: defaultMargin,
+                                    ),
+                                    Text(
+                                      "Fun-Raising",
+                                      style: TextThemeApp.headline.copyWith(
+                                          color: ColorsApp.whiteColor),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: defaultMargin,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    "Helps people execute their bright ideas",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: defaultMargin),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Explore",
+                                  style: TextThemeApp.regularText
+                                      .copyWith(color: ColorsApp.whiteColor, fontSize: 16),
+                                ),
+                                SizedBox(
+                                  height: defaultMargin,
+                                ),
+                                Text("Our Services",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("Equity System",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("Refund",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("Shareholder",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                              ],
+                            ),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Investor",
+                                  style: TextThemeApp.regularText
+                                      .copyWith(color: ColorsApp.whiteColor, fontSize: 16),
+                                ),
+                                SizedBox(
+                                  height: defaultMargin,
+                                ),
+                                Text("My Account",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("Top Startups",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("How-to Tutorials",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("Withdrawl",
+                                    style: TextThemeApp.regularText
+                                        .copyWith(color: ColorsApp.whiteColor, fontSize: 16)),
+                              ],
+                            ),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 100,
+                          )),
+                    ],
+                  ),
+                )
+              : Container()
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fundstartup_app/domain/campaign_entity.dart';
-import 'package:fundstartup_app/helper/reponseive_layout.dart';
 import 'package:fundstartup_app/theme/colors.dart';
 import 'package:fundstartup_app/theme/style.dart';
 
